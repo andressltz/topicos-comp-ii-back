@@ -1,0 +1,1 @@
+alter table user add is_changing_password bit not null default 0;
