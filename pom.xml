@@ -70,16 +70,33 @@
                 <version>3.0.5</version>
                 <configuration>
                     <propertyFile>src/main/resources/application.properties</propertyFile>
+                    <driver>com.mysql.jdbc.Driver</driver>
+                    <url>jdbc:mysql://127.0.0.1:3306/bolaofeevale</url>
+                    <username>simpleuser</username>
+                    <password>simplepassword</password>
+                    <changeLogFile>src/main/resources/migration/database-changelog.xml</changeLogFile>
+                    <dropFirst>true</dropFirst>
                 </configuration>
                 <executions>
                     <execution>
                         <phase>process-resources</phase>
                         <goals>
-                            <goal>update</goal>
+                            <!--<goal>update</goal>-->
                         </goals>
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>appengine-maven-plugin</artifactId>
+                <version>1.3.2</version>
+            </plugin>
+                <!--<plugin>-->
+                    <!--<groupId>org.eclipse.jetty</groupId>-->
+                    <!--<artifactId>jetty-maven-plugin</artifactId>-->
+                    <!--<version>9.3.7.v20160115</version>-->
+                <!--</plugin>-->
 
         </plugins>
     </build>
