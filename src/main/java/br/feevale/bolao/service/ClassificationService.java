@@ -115,9 +115,10 @@ public class ClassificationService {
 
             ArrayList<Thread> threads = new ArrayList<>();
 
-            for (int i = 1; i <= 38; i++) {
+            for (int i = 1; i <= 4; i++) {
                 final int round = i;
-                final StringBuilder sb = downloadPage("https://globoesporte.globo.com/servico/backstage/esportes_campeonato/esporte/futebol/modalidade/futebol_de_campo/categoria/profissional/campeonato/campeonato-brasileiro/edicao/campeonato-brasileiro-2018/fases/fase-unica-seriea-2018/rodada/" + round + "/jogos.html");
+//                final StringBuilder sb = downloadPage("https://globoesporte.globo.com/servico/backstage/esportes_campeonato/esporte/futebol/modalidade/futebol_de_campo/categoria/profissional/campeonato/campeonato-brasileiro/edicao/campeonato-brasileiro-2018/fases/fase-unica-seriea-2018/rodada/" + round + "/jogos.html");
+                final StringBuilder sb = downloadPage("https://andressltz.com.br/jogos/" + round + ".html");
 
                 Thread t = new Thread(() -> updateMatchesTable(sb, round));
 
