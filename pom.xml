@@ -7,8 +7,8 @@
     <groupId>br.feevale</groupId>
     <artifactId>backend-bolao-feevale</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <!--<packaging>war</packaging>-->
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
+    <!--<packaging>jar</packaging>-->
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -17,6 +17,7 @@
         <maven.compiler.target>${java.version}</maven.compiler.target> <!-- REQUIRED -->
         <appengine.maven.plugin>1.3.2</appengine.maven.plugin>
         <spring.version>2.1.1.RELEASE</spring.version>
+        <failOnMissingWebXml>false</failOnMissingWebXml>
     </properties>
 
     <!--<parent>-->
@@ -28,10 +29,27 @@
     <dependencies>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <version>${spring.version}</version>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-api-1.0-sdk</artifactId>
+            <version>1.9.69</version>
         </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <type>jar</type>
+            <scope>provided</scope>
+        </dependency>
+
+
+
+
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-web</artifactId>-->
+            <!--<version>${spring.version}</version>-->
+        <!--</dependency>-->
 
 
 
@@ -40,6 +58,7 @@
         <!--<dependency>-->
             <!--<groupId>org.springframework.boot</groupId>-->
             <!--<artifactId>spring-boot-starter-web</artifactId>-->
+            <!--<version>${spring.version}</version>-->
             <!--<exclusions>-->
                 <!--<exclusion>-->
                     <!--<groupId>org.springframework.boot</groupId>-->
@@ -50,6 +69,7 @@
         <!--<dependency>-->
             <!--<groupId>org.springframework.boot</groupId>-->
             <!--<artifactId>spring-boot-starter-jetty</artifactId>-->
+            <!--<version>${spring.version}</version>-->
         <!--</dependency>-->
 
         <dependency>
@@ -98,63 +118,77 @@
             <!--<version>1.0.0.RELEASE</version>-->
         <!--</dependency>-->
 
-
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>1.5.7.RELEASE</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
 
-            <!-- START plugin -->
+    <build>
+        <!-- for hot reload of the web application-->
+        <outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes</outputDirectory>
+        <plugins>
+            <!-- [START cloudplugin] -->
             <plugin>
                 <groupId>com.google.cloud.tools</groupId>
                 <artifactId>appengine-maven-plugin</artifactId>
-                <version>${appengine.maven.plugin}</version>
+                <version>1.3.1</version>
             </plugin>
-            <!-- END plugin -->
+            <!-- [END cloudplugin] -->
+        </plugins>
+    </build>
 
-            <plugin>
-                <groupId>org.liquibase</groupId>
-                <artifactId>liquibase-maven-plugin</artifactId>
-                <version>3.0.5</version>
-                <configuration>
-                    <propertyFile>src/main/resources/application.properties</propertyFile>
-                    <driver>com.mysql.jdbc.Driver</driver>
-                    <url>jdbc:mysql://186.202.127.183:3306/andresco_feevale</url>
-                    <username>andresco_feevale</username>
-                    <password>feevale@feevale</password>
-                    <changeLogFile>src/main/resources/migration/database-changelog.xml</changeLogFile>
-                    <dropFirst>true</dropFirst>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <!--<goal>update</goal>-->
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+    <!--<build>-->
+        <!--<plugins>-->
+            <!--&lt;!&ndash;<plugin>&ndash;&gt;-->
+                <!--&lt;!&ndash;<groupId>org.springframework.boot</groupId>&ndash;&gt;-->
+                <!--&lt;!&ndash;<artifactId>spring-boot-maven-plugin</artifactId>&ndash;&gt;-->
+                <!--&lt;!&ndash;<version>1.5.7.RELEASE</version>&ndash;&gt;-->
+                <!--&lt;!&ndash;<executions>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<execution>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<goals>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<goal>repackage</goal>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</goals>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</execution>&ndash;&gt;-->
+                <!--&lt;!&ndash;</executions>&ndash;&gt;-->
+            <!--&lt;!&ndash;</plugin>&ndash;&gt;-->
+
+            <!--&lt;!&ndash; START plugin &ndash;&gt;-->
+            <!--<plugin>-->
+                <!--<groupId>com.google.cloud.tools</groupId>-->
+                <!--<artifactId>appengine-maven-plugin</artifactId>-->
+                <!--<version>${appengine.maven.plugin}</version>-->
+            <!--</plugin>-->
+            <!--&lt;!&ndash; END plugin &ndash;&gt;-->
+
+            <!--<plugin>-->
+                <!--<groupId>org.liquibase</groupId>-->
+                <!--<artifactId>liquibase-maven-plugin</artifactId>-->
+                <!--<version>3.0.5</version>-->
+                <!--<configuration>-->
+                    <!--<propertyFile>src/main/resources/application.properties</propertyFile>-->
+                    <!--<driver>com.mysql.jdbc.Driver</driver>-->
+                    <!--<url>jdbc:mysql://186.202.127.183:3306/andresco_feevale</url>-->
+                    <!--<username>andresco_feevale</username>-->
+                    <!--<password>feevale@feevale</password>-->
+                    <!--<changeLogFile>src/main/resources/migration/database-changelog.xml</changeLogFile>-->
+                    <!--<dropFirst>true</dropFirst>-->
+                <!--</configuration>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<phase>process-resources</phase>-->
+                        <!--<goals>-->
+                            <!--&lt;!&ndash;<goal>update</goal>&ndash;&gt;-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
 
             <!--<plugin>-->
                 <!--<groupId>org.eclipse.jetty</groupId>-->
                 <!--<artifactId>jetty-maven-plugin</artifactId>-->
-                <!--<version>9.3.7.v20160115</version>-->
+                <!--<version>9.4.3.v20170317</version>-->
             <!--</plugin>-->
 
-        </plugins>
-    </build>
+        <!--</plugins>-->
+    <!--</build>-->
 
 
 </project>
