@@ -1,0 +1,12 @@
+runtime: java
+env: flex
+runtime_config:
+   jdk: openjdk8
+   server: jetty9
+env_variables:
+  SPRING_PROFILES_ACTIVE: "gcp"
+handlers:
+- url: /.*
+  script: this field is required, but ignored
+manual_scaling:
+  instances: 1
