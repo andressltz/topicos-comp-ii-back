@@ -31,6 +31,8 @@ public class UserService {
 
     public void save(User user) {
         if (user.getId() == null) {
+            user.setPassword(encryptPassword(user.getPassword()));
+            user.setChangingPassword(false);
             create(user);
         } else {
             update(user);
@@ -108,7 +110,7 @@ public class UserService {
 
         repository.save(user);
 
-        startPasswordRecovery(user.getEmail());
+//        startPasswordRecovery(user.getEmail());
     }
 
     private void update(User user) {
