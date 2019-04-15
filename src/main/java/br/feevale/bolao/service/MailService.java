@@ -14,7 +14,7 @@ public class MailService {
     private static final String MAIL_PASSWORD = "meda10sandra";
 
     public void sendMailChangePassword(User user) {
-        String url = "http://localhost:8080/senha/" + user.getToken();
+        String url = "https://topicos-feevale-ii-front.appspot.com/senha/" + user.getToken();
 
         StringBuilder sb = new StringBuilder();
 
