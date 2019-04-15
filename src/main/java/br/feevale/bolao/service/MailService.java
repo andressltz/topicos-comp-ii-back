@@ -10,8 +10,8 @@ import java.util.Properties;
 
 @Component
 public class MailService {
-    private static final String MAIL_ADDRESS = "bolao.feevale@gmail.com";
-    private static final String MAIL_PASSWORD = "meda10sandra";
+    private static final String MAIL_ADDRESS = "aula@andressltz.com.br";
+    private static final String MAIL_PASSWORD = "eNg@FeevIIE.2";
 
     public void sendMailChangePassword(User user) {
         String url = "https://topicos-feevale-ii-front.appspot.com/senha/" + user.getToken();
@@ -33,7 +33,7 @@ public class MailService {
     private void sendMail(String to, String subject, String body) {
         try {
             Properties prop = new Properties();
-            prop.put("mail.smtp.host", "smtp.gmail.com");
+            prop.put("mail.smtp.host", "cpanel0090.hospedagemdesites.ws");
             prop.put("mail.smtp.socketFactory.port", "465");
             prop.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
             prop.put("mail.smtp.auth", "true");
